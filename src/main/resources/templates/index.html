@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:method="GET" th:action="@{/search}">
+    <label for="query">Введите поисковый запрос</label>
+    <input type="text" id="query" name="query"/>
+    <br/>
+    <input type="submit" value="Найти"/>
+</form>
+<div th:if="${followers == null}">
+    <span>Пользователи не найдены</span>
+</div>
+<div th:if="${followers != null}">
+    <h1>Фолловеры </h1>
+    <h1 th:text="${query}"></h1>
+    <div th:each="follower : ${followers}">
+        <img th:src="${follower.getAvatar_url()}" width="50" height="50"/>
+        <p th:text="${follower.getLogin()}"></p>
+        <a th:href="${follower.getHtml_url()}" th:text="${follower.getHtml_url()}"></a>
+    </div>
+</div>
+</body>
+</html>
